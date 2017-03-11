@@ -32,27 +32,27 @@
             <div class="col-md-4">
                 <div class="panel panel-${paneltype}">
                     <div class="panel-body">
-                        <div class="col-md-12">
+                        <div class="col-xs-12 col-md-12">
                             <div class="row">
                                 <form role="form" submit.delegate="submit()" class="panel-input">
-                                    <div class="col-md-3 nopadding">
+                                    <div class="col-xs-3 col-md-3 nopadding">
                                         <div class="form-group">
                                             <input type="text" class="form-control" disabled value.bind="numberone">
                                         </div>
                                     </div>
-                                    <div class="col-md-1 nopadding text-center math-sign">x</div>
-                                    <div class="col-md-3 nopadding">
+                                    <div class="col-xs-1 col-md-1 nopadding text-center math-sign">x</div>
+                                    <div class="col-xs-3 col-md-3 nopadding">
                                         <div class="form-group">
                                             <input type="text" class="form-control" disabled value.bind="numbertwo">
                                         </div>
                                     </div>
-                                    <div class="col-md-1 nopadding text-center math-sign">=</div>
-                                    <div class="col-md-4 nopadding">
+                                    <div class="col-xs-1 col-md-1 nopadding text-center math-sign">=</div>
+                                    <div class="col-xs-4 col-md-4 nopadding">
                                         <div class="form-group">
-                                            <input type="text" class="form-control" value.bind="result" focus>
+                                            <input type="tel" class="form-control" value.bind="result" focus id="formresult">
                                         </div>
                                     </div>
-                                    <div class="col-md-12 text-right">
+                                    <div class="col-xs-12 col-md-12 text-right">
                                         <button type="submit" class="btn btn-default">Submit</button>
                                     </div>
                                 </form>
@@ -78,8 +78,8 @@
         </div>
         <div class="row sphero-path">
             <div>
-                <div class="col-md-6 text-left">Player ${username}</div>
-                <div class="col-md-6 text-right">Player ${guest}</div>
+                <div class="col-xs-6 col-md-6 text-left">Player ${username}</div>
+                <div class="col-xs-6 col-md-6 text-right">Player ${guest}</div>
             </div>
             <hr/>
             <div style="height: 170px ; width: 2px; left: 50%; position: absolute; border-left: 1px solid #eee;">

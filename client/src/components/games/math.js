@@ -16,7 +16,7 @@ export class Mathematic {
         this.srvBattle = battleService;
         this.navBar = navBar;
         this.eventAggregator = eventAggregator;
-        this.socket = io('http://localhost:9000');
+        this.socket = io('http://192.168.1.106:9000');
     }
 
     activate() {
@@ -39,8 +39,6 @@ export class Mathematic {
             this.router.navigate("home");
         }
 
-        this._initSphero();
-
         this.socket.emit('getusers');
         this.socket.emit('adduser', this.username);
 
@@ -62,6 +60,8 @@ export class Mathematic {
     }
 
     submit() {
+        $( "#formresult" ).focus();
+
         this.solution = this.numberone * this.numbertwo;
 
         if (this.solution == this.result) {
