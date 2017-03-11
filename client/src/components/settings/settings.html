@@ -1,0 +1,25 @@
+<template>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Adress</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr repeat.for="device of devices">
+                                <td>${device.name}</td>
+                                <td>${device.address}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <button class="btn btn-default" click.delegate="onClickConnect()">Connect</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>

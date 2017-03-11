@@ -1,0 +1,93 @@
+<template>
+    <div class="container battle">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="panel panel-${paneltype}">
+                    <div class="panel-body">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>x</th>
+                                    <th></th>
+                                    <th>y</th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="bg-${equation.type}" if.bind="equation.type">
+                                    <td>${equation.numberone}</td>
+                                    <td>*</td>
+                                    <td>${equation.numbertwo}</td>
+                                    <td>=</td>
+                                    <td>${equation.result}</td>
+                                    <td><span if.bind="equation.type === 'danger'">${equation.solution}</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="panel panel-${paneltype}">
+                    <div class="panel-body">
+                        <div class="col-md-12">
+                            <div class="row">
+                                <form role="form" submit.delegate="submit()" class="panel-input">
+                                    <div class="col-md-3 nopadding">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" disabled value.bind="numberone">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-1 nopadding text-center math-sign">x</div>
+                                    <div class="col-md-3 nopadding">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" disabled value.bind="numbertwo">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-1 nopadding text-center math-sign">=</div>
+                                    <div class="col-md-4 nopadding">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" value.bind="result" focus>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 text-right">
+                                        <button type="submit" class="btn btn-default">Submit</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div class="progress">
+                            <div class="progress-bar" role="progressbar" aria-valuenow="${pos_progress}" aria-valuemin="0" aria-valuemax="100" style="width: ${pos_progress}%;">
+                            </div>
+                        </div>
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="${neg_progress}" aria-valuemin="0" aria-valuemax="100" style="width: ${neg_progress}%;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row sphero-path">
+            <div>
+                <div class="col-md-6 text-left">Player ${username}</div>
+                <div class="col-md-6 text-right">Player ${guest}</div>
+            </div>
+            <hr/>
+            <div style="height: 170px ; width: 2px; left: 50%; position: absolute; border-left: 1px solid #eee;">
+            </div>
+            <div style="margin: 0 auto; margin-left: ${sphero.pos}px;">
+                <div class="sphero-img"><img src="img/sphero.png"></div>
+            </div>
+            <hr/>
+        </div>
+    </div>
+</template>

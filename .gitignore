@@ -1,0 +1,11 @@
+.idea/
+client/node_modules
+client/jspm_packages
+client/bower_components
+client/.DS_STORE
+client/dist
+client/build/reports
+client/coverage
+client/test/e2e/dist
+
+server/node_modules
