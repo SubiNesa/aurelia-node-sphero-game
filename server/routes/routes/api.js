@@ -63,51 +63,75 @@ module.exports = function (express) {
         });
     });
 
-    router.post('/battle/start', function(req, res) {
+    router.post('/battle/init', function(req, res) {
 
-        if (lodash.size(battlegame.players) >= 2 ) {
-            return res.status(400).send({ message: 'fool' });
-        }
-        var player = lodash.size(battlegame.players) + 1;
-
-        if (player === 1) {
-            player = 'one';
-        } else {
-            player = 'two';
+        if (!orb) {
+            return res.status(500).send({ message: 'no_device' });
         }
 
-        battlegame.players[player] = {
-            score: 0,
-            player: player
-        };
 
-        res.json({ player: player });
+        orb.detectCollisions();
+
+
+        orb.on("collision", function(data) {
+
+            console.log('');
+            console.log('!   !');
+            console.log('collision');
+            console.log('');
+            console.log('');
+            orb.color("red");
+
+            setTimeout(function() {
+              orb.color("green");
+            }, 1000);
+        });
+
+        // Move 50 cm
+        orb.roll(32, 0);
+        setTimeout(function() {
+            orb.color("blue");
+        }, 5000);
+
+        setTimeout(function() {
+            orb.color("green");
+            orb.roll(63, 180);
+        }, 10000);
+
+        setTimeout(function() {
+            orb.color("blue");
+        }, 15000);
+
+        setTimeout(function() {
+            orb.color("green");
+            orb.roll(33, 0);
+        }, 20000);
+
+        res.json({ });
 
     });
 
-    router.put('/battle/checkpoint', function(req, res) {
+    router.put('/battle/move', function(req, res) {
         console.log('------- ===');
         console.log(req.query);
-        console.log(battlegame);
+        console.log(req.query.direction);
 
-        battlegame.players[req.query.player].score += Number(req.query.points);
-        if (req.query.player == 1) {
-            if (req.query.points > 0) {
-                battlegame.sphero.pos += 10;
-            } else {
-                battlegame.sphero.pos -= 10;
+        var direction = 0;
+
+        if (req.query.player = 'nemanja') {
+
+            if (req.query.direction === 'backword') {
+                direction = 180;
             }
         } else {
-            if (req.query.points < 0) {
-                battlegame.sphero.pos += 10;
-            } else {
-                battlegame.sphero.pos -= 10;
+            if (req.query.direction === 'backword') {
+                direction = 0;
             }
         }
 
-        console.log(battlegame);
+        orb.roll(7, direction);
 
-        res.json(battlegame);
+        res.json(req.query);
     });
 
     return router;

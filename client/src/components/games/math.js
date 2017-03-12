@@ -16,7 +16,7 @@ export class Mathematic {
         this.srvBattle = battleService;
         this.navBar = navBar;
         this.eventAggregator = eventAggregator;
-        this.socket = io('http://192.168.1.106:9000');
+        this.socket = io('http://localhost:9000');
     }
 
     activate() {
@@ -144,7 +144,31 @@ export class Mathematic {
         }
     }
 
+    _initSphero() {
+        this.srvBattle.init()
+            .then(data => {
+                $('body').removeClass('loading');
+                console.log(data);
+                this.devices = data;
+            })
+            .catch(error => {
+                $('body').removeClass('loading');
+                console.warn(error);
+            });
+    }
+
     _moveSphero(data) {
+
+        this.srvBattle.move({direction: data.direction, player: this.username})
+            .then(data => {
+                console.log(data);
+                this.devices = data;
+
+            })
+            .catch(error => {
+                console.warn(error);
+            });
+
         if (data.direction === 'forword') {
             this.sphero.pos += Number(this.forword);
             this.sphero.steps += 1;
@@ -185,6 +209,9 @@ export class Mathematic {
 
         this.socket.on('updatuser', function(user) {
             _this.guest = user;
+            if (user) {
+                _this._initSphero();
+            }
         });
 
         this.socket.on('spheromoved', function(data) {
@@ -193,9 +220,12 @@ export class Mathematic {
 
         // Set logged user / guest
         this.socket.on('setusers', function(data) {
+            $('body').addClass('loading');
+
             if (!jQuery.isEmptyObject(data)) {
                 let keys = Object.keys(data);
                 _this.guest = data[keys[0]].username;
+                $('body').removeClass('loading');
             }
         });
     }

@@ -9,9 +9,9 @@ export class BattleService {
         this.api = apiService;
     };
 
-    start() {
+    init() {
         return new Promise((resolve, reject) => {
-            this.api.post({ path: '/battle/start/' })
+            this.api.post({ path: '/battle/init/' })
                 .then(httpResponse => {
                     var data = JSON.parse(httpResponse);
                     resolve(data);
@@ -22,9 +22,9 @@ export class BattleService {
         });
     }
 
-    checkpoint(params) {
+    move(params) {
         return new Promise((resolve, reject) => {
-            this.api.put({ path: '/battle/checkpoint/', params: params})
+            this.api.put({ path: '/battle/move/', params: params})
                 .then(httpResponse => {
                     var data = JSON.parse(httpResponse);
                     resolve(data);
